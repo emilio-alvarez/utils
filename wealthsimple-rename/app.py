@@ -13,8 +13,15 @@ def main():
 
   directory = os.fsencode(input_directory)
 
-  for file in os.listdir(input_directory):
+  for file in os.listdir(directory):
     filename = os.fsdecode(file)
+
+    # Get account number from file name
+    # Get ticker from file name
+    # Get settlement date from pdf
+    # Check if file name exists
+    # Append suffix if it does; loop;
+    # Rename file
   
 load_dotenv()
 main()
