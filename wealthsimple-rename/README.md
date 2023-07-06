@@ -36,7 +36,7 @@ python3 -m pip install -r requirements.txt
 # Notes
 
 ## Required data
-- Account mapping (id -> desired file account name)
+- Account mapping (number -> desired file account name)
   - id in the original file name
   - desired file account name in env mapping
 - Ticker symbol
