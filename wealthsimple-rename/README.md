@@ -32,3 +32,17 @@ source .venv/bin/activate
 ```
 python3 -m pip install -r requirements.txt
 ```
+
+# Notes
+
+## Required data
+- Account mapping (id -> desired file account name)
+  - id in the original file name
+  - desired file account name in env mapping
+- Ticker symbol
+  - in original file name after `TRADE_CONFIRM_ID_TICKER`
+- Settlement date
+  - in pdf after `For Settlement On:`
+
+## Command line arguments
+- input directory
