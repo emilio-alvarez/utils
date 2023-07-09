@@ -35,16 +35,18 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-# Notes
+## Usage
 
-## Required data
-- Account mapping (number -> desired file account name)
-  - id in the original file name
-  - desired file account name in env mapping
-- Ticker symbol
-  - in original file name after `TRADE_CONFIRM_ID_TICKER`
-- Settlement date
-  - in pdf after `For Settlement On:`
+### Set up accounts
+Create an `accounts.json` file with the following format
 
-## Command line arguments
-- input directory
+```json
+{
+  "AccountNumber1": "TFSA",
+  "7892754938254": "401K"
+}
+```
+
+Create a folder consisting of only the files you wish to rename.
+
+Run: `python3 app.py path_to_input_directory`
