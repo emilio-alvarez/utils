@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import re
 from pypdf import PdfReader
 
 def load_accounts():
@@ -13,11 +14,11 @@ def load_accounts():
 
 def extract_account_number(filename):
   # Get account number from file name
-  return filename.split("_")[2]
+  return filename.split("_")[2].strip()
 
 def extract_ticker(filename):
   # Get ticker from file name
-  return filename.split("_")[3]
+  return filename.split("_")[3].strip()
 
 def extract_settlement_date(filepath):
   # Get settlement date from file contents
@@ -42,7 +43,7 @@ def format_name(input_directory, account_number, ticker, settlement_date):
     name = "{account_name}-{ticker}-{settlement_date}-{iterations}.pdf".format(**locals())
 
     file_collision = file_exists(os.path.join(input_directory, name))
-    print(name)
+    iterations += 1
   
   return name
 
@@ -58,6 +59,8 @@ def rename_files(input_directory):
 
   for file in os.listdir(directory):
     filename = os.fsdecode(file)
+    if re.search("^.*-.*-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9].pdf", filename):
+      continue
     filepath = os.path.join(input_directory, filename)
 
     account_number = extract_account_number(filename)
