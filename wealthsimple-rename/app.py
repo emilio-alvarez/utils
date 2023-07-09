@@ -1,6 +1,72 @@
 import os
 import sys
-from dotenv import load_dotenv
+import json
+from pypdf import PdfReader
+
+def load_accounts():
+  accounts = {}
+
+  with open("accounts.json") as file:
+    accounts = json.load(file)
+
+  return accounts
+
+def extract_account_number(filename):
+  # Get account number from file name
+  return filename.split("_")[2]
+
+def extract_ticker(filename):
+  # Get ticker from file name
+  return filename.split("_")[3]
+
+def extract_settlement_date(filepath):
+  # Get settlement date from file contents
+  reader = PdfReader(filepath)
+  page = reader.pages[0]
+  for line in page.extract_text().split("\n"):
+    if "For Settlement On" in line:
+      return line.split(":")[1].strip()
+
+def file_exists(filename):
+  # Does the filename exist
+  return os.path.isfile(filename)
+
+def format_name(input_directory, account_number, ticker, settlement_date):
+  # Interpolate the new file name
+  # Loop until a unique filename is found
+  file_collision = True
+  iterations = 0
+  account_name = accounts[account_number]
+  name = "none.pdf"
+  while file_collision:
+    name = "{account_name}-{ticker}-{settlement_date}-{iterations}.pdf".format(**locals())
+
+    file_collision = file_exists(os.path.join(input_directory, name))
+    print(name)
+  
+  return name
+
+def rename_file(input_directory, old_name, new_name):
+  print("Renaming {old_name} -> {new_name}".format(**locals()))
+  os.rename(
+    os.path.join(input_directory, old_name),
+    os.path.join(input_directory, new_name)
+  )
+
+def rename_files(input_directory):
+  directory = os.fsencode(input_directory)
+
+  for file in os.listdir(directory):
+    filename = os.fsdecode(file)
+    filepath = os.path.join(input_directory, filename)
+
+    account_number = extract_account_number(filename)
+    ticker = extract_ticker(filename)
+    settlement_date = extract_settlement_date(filepath)
+
+    new_name = format_name(input_directory, account_number, ticker, settlement_date)
+    
+    rename_file(input_directory, filename, new_name)
 
 def main():
   input_directory = "."
@@ -11,17 +77,7 @@ def main():
     print("Specify a valid input directory")
     return
 
-  directory = os.fsencode(input_directory)
+  rename_files(input_directory)
 
-  for file in os.listdir(directory):
-    filename = os.fsdecode(file)
-
-    # Get account number from file name
-    # Get ticker from file name
-    # Get settlement date from pdf
-    # Check if file name exists
-    # Append suffix if it does; loop;
-    # Rename file
-  
-load_dotenv()
+accounts = load_accounts()
 main()

@@ -2,6 +2,8 @@
 
 This utility renames wealthsimple trade confirmations based on their contents.
 
+Converts filenames like `TRADE_CONFIRM_4873294732_TSLA _order-57894hfi32.pdf` into `Account-TSLA-2023-07-09`.
+
 ## Setup
 
 ### Requirements

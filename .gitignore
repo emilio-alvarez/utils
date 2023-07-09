@@ -1,2 +1,2 @@
-.venv
-.env
+.*
+wealthsimple-rename/accounts.json
