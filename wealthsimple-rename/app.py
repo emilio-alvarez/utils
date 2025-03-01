@@ -44,7 +44,7 @@ def format_name(input_directory, account_number, ticker, settlement_date):
 
     file_collision = file_exists(os.path.join(input_directory, name))
     iterations += 1
-  
+
   return name
 
 def rename_file(input_directory, old_name, new_name):
@@ -68,7 +68,7 @@ def rename_files(input_directory):
     settlement_date = extract_settlement_date(filepath)
 
     new_name = format_name(input_directory, account_number, ticker, settlement_date)
-    
+
     rename_file(input_directory, filename, new_name)
 
 def main():
