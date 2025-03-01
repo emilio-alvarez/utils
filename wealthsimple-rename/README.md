@@ -9,12 +9,7 @@ Converts filenames like `TRADE_CONFIRM_4873294732_TSLA _order-57894hfi32.pdf` in
 ### Requirements
 - pip3
   ```
-  sudo apt install python3-pip python3.10-venv
-  python3 -m pip install --user --upgrade pip
-  ```
-- venv
-  ```
-  python3 -m pip install --user virtualenv
+  sudo apt install python3-pip python3-venv
   ```
 
 ### Create a virtual environment
@@ -32,7 +27,7 @@ source .venv/bin/activate
 ### Install requirements
 
 ```
-python3 -m pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Usage
