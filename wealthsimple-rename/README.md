@@ -7,10 +7,9 @@ Converts filenames like `TRADE_CONFIRM_4873294732_TSLA _order-57894hfi32.pdf` in
 ## Setup
 
 ### Requirements
-- pip3
-  ```
-  sudo apt install python3-pip python3-venv
-  ```
+```
+sudo apt install python3-pip python3-venv
+```
 
 ### Create a virtual environment
 
